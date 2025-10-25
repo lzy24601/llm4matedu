@@ -5,6 +5,9 @@ build/
 dist/
 wheels/
 *.egg-info
-config.yaml
 # Virtual environments
 .venv
+# Config file
+config.yaml
+# 日志文件
+logs/
