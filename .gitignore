@@ -10,6 +10,6 @@ wheels/
 # Config file
 config.yaml
 # 日志文件
-logs/
+*.log
 # 数据
 data/
