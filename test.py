@@ -1,23 +1,9 @@
-import time
+import pathlib
+import pymupdf4llm
 
+pdf = pathlib.Path("/home/fstar/lzy/llm4matedu/data/pdfs/ch3.2.pdf")
+print(pdf.suffix)
+# md = pymupdf4llm.to_markdown(pdf)
 
-def time_it(func):
-    print("I'm outter")
-
-    def wrapper(*args, **kwargs):
-        start_tiem = time.perf_counter()
-        res = func(*args, **kwargs)
-        end_time = time.perf_counter()
-        print(f"函数 {func.__name__} 运行时间: {end_time - start_tiem} 秒")
-        return res
-
-    return wrapper
-
-
-# time_it(test)
-@time_it
-def test():
-    print("test")
-
-
-test()
+# print(type(md))
+# pathlib.Path("output.md").write_bytes(md.encode())

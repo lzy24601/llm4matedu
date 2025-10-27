@@ -1,29 +1,26 @@
-# from llms.llm_api import test_log
-from utils.log_it import log_function_call
+import pathlib
+from utils.document_processor import DocumentProcessor
+from qa_generation.qa_generator import QAGenerator
 
-"""
-装饰器有无括号的区别
-无括号
-@dec
-def f():
-    pass
-等价于 f = dec(f)
+qa_generator = QAGenerator("/home/fstar/lzy/llm4matedu/config.yaml")
+document_processor = DocumentProcessor()
+now__dir__ = "/home/fstar/lzy/llm4matedu/data/markdowns"
+path = []
+for file in pathlib.Path(now__dir__).rglob("*"):
+    if file.suffix.lower() == ".md":
+        path.append(file)
+# res = dp.read_document(document_type=".md", documents_path=path)
+doc_content = document_processor.split_documents(
+    document_type=".md", documents_path=path
+)
 
-有括号
-@dec(x)
-def f():
-    pass
-等价于 f = dec(x)(f)
-"""
+qa = []
+cnt = 0
+for doc_name, chunks in doc_content.items():
+    for chunk in chunks:
+        if cnt >= 1:
+            break
+        qa.append(qa_generator.generate_qa_from_documents(chunk))
+        cnt += 1
 
-
-@log_function_call()
-def main():
-    # print()
-    # test_log()
-    print("hello")
-    return 1
-
-
-if __name__ == "__main__":
-    main()
+print(qa)

@@ -35,7 +35,6 @@ class LocalLLM(BaseLLM):
         stop=None,
         logprobs=None,
         n=1,
-        best_of=1,
         retries=3,
     ):
         response = None
